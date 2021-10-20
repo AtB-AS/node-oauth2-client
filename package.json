@@ -25,6 +25,8 @@
         "oauth",
         "oauth2",
         "client credentials",
+        "password",
+        "username",
         "bearer",
         "token",
         "workflows",
