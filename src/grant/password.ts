@@ -17,7 +17,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import { URLSearchParams } from 'url';
 import { returnTrue } from '../constants';
 import type { AxiosFactory, NewAxiosClientConfig, Nilable } from '../types';
