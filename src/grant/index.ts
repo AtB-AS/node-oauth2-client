@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable no-underscore-dangle */
-
 // This file is part of the @egomobile/oauth2-client distribution.
 // Copyright (c) Next.e.GO Mobile SE, Aachen, Germany (https://e-go-mobile.com/)
 //
@@ -16,5 +13,5 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-export * from './grant';
-export * from './types';
+export * from './client_credentials';
+export * from './password';

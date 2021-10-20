@@ -13,6 +13,21 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+
+/**
+ * A function that provides an axios instance.
+ */
+export type AxiosFactory = () => Promise<AxiosInstance>;
+
+// preparations for NewAxiosClientConfig
+type NewAxiosClientConfig1 = Omit<AxiosRequestConfig<any>, 'headers'>;
+type NewAxiosClientConfig2 = Omit<NewAxiosClientConfig1, 'baseURL'>;
+/**
+ * Configuration for a new axios client.
+ */
+export type NewAxiosClientConfig = NewAxiosClientConfig2;
+
 /**
  * A type that can be (null) or (undefined).
  */
