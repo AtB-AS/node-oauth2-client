@@ -1,0 +1,61 @@
+{
+    "name": "@egomobile/oauth2-client",
+    "version": "0.1.0",
+    "description": "Creates and setups pre-configured axios clients, using OAuth 2.0 workflow(s).",
+    "main": "lib/index.js",
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "scripts": {
+        "build": "del ./lib && tsc",
+        "docs:generate": "del ./docs && typedoc --out ./docs ./src",
+        "lint": "eslint -c .eslintrc.js --ext .ts src",
+        "lint:fix": "eslint --fix -c .eslintrc.js --ext .ts src",
+        "sandbox": "nodemon --watch './sandbox.ts' --exec node -r ts-node/register --inspect=0.0.0.0:9229 ./sandbox.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/egomobile/node-oauth2-client.git"
+    },
+    "keywords": [
+        "node",
+        "http",
+        "client",
+        "axios",
+        "oauth",
+        "oauth2",
+        "client credentials",
+        "bearer",
+        "token",
+        "workflows",
+        "jwt",
+        "json web token",
+        "javascript",
+        "typescript",
+        "ego"
+    ],
+    "author": "Next.e.GO Mobile SE, Aachen, Germany",
+    "license": "LGPL-3.0",
+    "files": [
+        "CHANGELOG.md",
+        "LICENSE",
+        "lib",
+        "!lib/**/*.map",
+        "README.md"
+    ],
+    "dependencies": {
+        "@types/node": "^12.20.33",
+        "axios": "^0.23.0"
+    },
+    "devDependencies": {
+        "@egomobile/tsconfig": "^5.0.0",
+        "del-cli": "^4.0.1",
+        "eslint": "^7.32.0",
+        "eslint-config-ego": "^0.15.0",
+        "nodemon": "^2.0.13",
+        "ts-node": "^10.2.1",
+        "tslint": "^6.1.3",
+        "typedoc": "^0.22.5",
+        "typescript": "^4.4.3"
+    }
+}
