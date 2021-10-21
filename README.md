@@ -16,8 +16,10 @@ npm install --save @egomobile/oauth2-client
 
 ## Usage
 
+### client_credentials
+
 ```typescript
-import createClientCredentialsClientFactory from "@egomobile/oauth2-client";
+import { createClientCredentialsClientFactory } from "@egomobile/oauth2-client";
 
 // create a factory function, that creates
 // a pre-configured API client that already
@@ -31,7 +33,7 @@ export const createApiClient = createClientCredentialsClientFactory({
 
   // base URL of the API
   baseURL: "https://api.example.com",
-  // URL to get the token
+  // URL from where to get the token from
   tokenURL: "https://api.example.com/oauth2/token",
 
   // optional extra default headers
@@ -42,7 +44,59 @@ export const createApiClient = createClientCredentialsClientFactory({
   // optional and additional / custom
   // axios configuration
   config: {
-    // this always returns (true) by default
+    // this always accept any status code
+    // and will now throw errors on HTTP error codes
+    validateStatus: (status) => status < 400,
+  },
+});
+
+function doApiCall() {
+  // create client with the new factory
+  // without subitting the credentials
+  // every time
+  const client = await createClient();
+
+  // now, do some API call with a pre-configured client
+  // that submits the access_token as Bearer via
+  // Authorization header
+  return client.get("/foo?bar=baz"); // [GET] https://api.example.com/foo?bar=baz
+}
+
+const response = await doApiCall();
+```
+
+### password
+
+```typescript
+import { createPasswordClientFactory } from "@egomobile/oauth2-client";
+
+// create a factory function, that creates
+// a pre-configured API client that already
+// has an access_token, submitted as Bearer by default
+export const createApiClient = createPasswordClientFactory({
+  // data for client authorization
+  auth: {
+    clientId: "foo",
+    clientSecret: "bar",
+    username: "bill",
+    password: "G@tes1234!",
+  },
+
+  // base URL of the API
+  baseURL: "https://api.example.com",
+  // URL from where to get the token from
+  tokenURL: "https://api.example.com/oauth2/token",
+
+  // optional extra default headers
+  headers: {
+    "x-baz": "some value for an extra header",
+  },
+
+  // optional and additional / custom
+  // axios configuration
+  config: {
+    // this always accept any status code
+    // and will now throw errors on HTTP error codes
     validateStatus: (status) => status < 400,
   },
 });
