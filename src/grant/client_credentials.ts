@@ -17,10 +17,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
-import { URLSearchParams } from 'url';
-import { returnTrue } from '../constants';
-import type { AxiosFactory, NewAxiosClientConfig, Nilable } from '../types';
+import axios, {AxiosInstance, AxiosRequestHeaders} from 'axios';
+import {URLSearchParams} from 'url';
+import {returnTrue} from '../constants';
+import type {AxiosFactory, NewAxiosClientConfig, Nilable} from '../types';
 
 /**
  * Options for 'createClientCredentialsClient()' and
@@ -52,6 +52,10 @@ export interface ICreateClientCredentialsClientOptions {
      * Optional and custom headers.
      */
     headers?: Nilable<AxiosRequestHeaders>;
+    /**
+     * The optional audience, if required.
+     */
+    audience?: Nilable<string[]>;
     /**
      * The optional scope, if required.
      */
@@ -108,7 +112,7 @@ export interface ICreateClientCredentialsClientOptions {
 export async function createClientCredentialsClient(
     options: ICreateClientCredentialsClientOptions
 ): Promise<AxiosInstance> {
-    const { auth, baseURL, config, headers, scope, tokenURL } = options;
+    const { auth, baseURL, config, headers, scope, tokenURL, audience } = options;
     const { clientId, clientSecret } = auth;
 
     if (baseURL) {
@@ -139,6 +143,7 @@ export async function createClientCredentialsClient(
     requestBody.set('grant_type', 'client_credentials');
     requestBody.set('client_id', clientId);
     requestBody.set('client_secret', clientSecret);
+    audience?.map(aud => requestBody.append('audience', aud));
 
     if (scope?.length) {
         requestBody.set('scope', scope);
